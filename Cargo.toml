@@ -15,16 +15,15 @@ categories = ["data-structures", "hardware-support", "mathematics"]
 all = ["freqfs", "opencl", "stream"]
 freqfs = ["freqfs/stream", "stream"]
 opencl = ["memoize", "ocl"]
-stream = ["async-trait", "destream", "futures"]
+stream = ["destream", "futures"]
 
 [build-dependencies]
 pkg-config = "0.3"
 
 [dependencies]
-async-trait = { version = "0.1", optional = true }
-destream = { version = "0.8", optional = true }
+destream = { version = "0.9", optional = true }
 futures = { version = "0.3", optional = true }
-freqfs = { version = "0.10", optional = true }
+freqfs = { version = "0.11", optional = true }
 get-size = "0.1"
 lazy_static = "1.5"
 memoize = { version = "0.4", optional = true }

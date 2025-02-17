@@ -366,7 +366,6 @@ impl<T> BufferVisitor<T> {
 #[cfg(feature = "stream")]
 macro_rules! decode_buffer {
     ($t:ty, $name:expr, $decode:ident, $visit:ident, $encode:ident) => {
-        #[async_trait::async_trait]
         impl de::Visitor for BufferVisitor<$t> {
             type Value = Buffer<$t>;
 
@@ -399,7 +398,6 @@ macro_rules! decode_buffer {
             }
         }
 
-        #[async_trait::async_trait]
         impl de::FromStream for Buffer<$t> {
             type Context = ();
 
