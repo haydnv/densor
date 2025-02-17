@@ -700,7 +700,7 @@ impl Enqueue<OpenCL, f32> for RandomNormal {
 
     fn enqueue(&self) -> Result<Self::Buffer, Error> {
         let queue = OpenCL::queue(self.size, &[])?;
-        let seed: u32 = rand::thread_rng().gen();
+        let seed: u32 = rand::rng().random();
 
         let buffer = Buffer::builder()
             .queue(queue.clone())

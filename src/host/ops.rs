@@ -1035,7 +1035,7 @@ impl Enqueue<Heap, f32> for RandomNormal {
             }
         ];
 
-        rand::thread_rng().fill(&mut u[..]);
+        rand::rng().fill(&mut u[..]);
 
         let mut output = u
             .par_chunks_exact(2)
@@ -1060,9 +1060,9 @@ impl Enqueue<Stack, f32> for RandomNormal {
     type Buffer = StackVec<f32>;
 
     fn enqueue(&self) -> Result<Self::Buffer, Error> {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
 
-        let mut output = iter::repeat_with(|| [rng.gen(), rng.gen()])
+        let mut output = iter::repeat_with(|| [rng.random(), rng.random()])
             .take(self.size.div_ceil(2))
             .map(Self::box_muller)
             .flatten()
@@ -1115,7 +1115,7 @@ impl Enqueue<Heap, f32> for RandomUniform {
 
     fn enqueue(&self) -> Result<Self::Buffer, Error> {
         let mut data = vec![0.; self.size];
-        rand::thread_rng().fill(&mut data[..]);
+        rand::rng().fill(&mut data[..]);
         Ok(data)
     }
 }
@@ -1125,7 +1125,7 @@ impl Enqueue<Stack, f32> for RandomUniform {
 
     fn enqueue(&self) -> Result<Self::Buffer, Error> {
         let mut data = stackvec![0.; self.size];
-        rand::thread_rng().fill(&mut data[..]);
+        rand::rng().fill(&mut data[..]);
         Ok(data)
     }
 }
@@ -1140,7 +1140,7 @@ impl Enqueue<Host, f32> for RandomUniform {
 
 impl ReadValue<Host, f32> for RandomUniform {
     fn read_value(&self, _offset: usize) -> Result<f32, Error> {
-        Ok(rand::thread_rng().gen())
+        Ok(rand::rng().random())
     }
 }
 
