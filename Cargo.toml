@@ -1,6 +1,6 @@
 [package]
 name = "ha-ndarray"
-version = "0.4.0"
+version = "0.5.0"
 edition = "2021"
 authors = ["code@tinychain.net"]
 description = "A hardware-accelerated n-dimensional array"
