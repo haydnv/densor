@@ -2,8 +2,8 @@ use std::borrow::BorrowMut;
 use std::fmt;
 use std::marker::PhantomData;
 
+use frand::Rand;
 use ocl::{Buffer, Kernel, Program, Queue};
-use rand::{random, Rng};
 
 use crate::access::{Access, AccessBuf, AccessMut};
 use crate::ops::{Enqueue, Op, ReadValue, ReduceAll, SliceSpec, ViewSpec, Write};
@@ -700,7 +700,7 @@ impl Enqueue<OpenCL, f32> for RandomNormal {
 
     fn enqueue(&self) -> Result<Self::Buffer, Error> {
         let queue = OpenCL::queue(self.size, &[])?;
-        let seed: u32 = rand::rng().random();
+        let seed: u32 = Rand::new().gen();
 
         let buffer = Buffer::builder()
             .queue(queue.clone())
@@ -762,7 +762,7 @@ impl Enqueue<OpenCL, f32> for RandomUniform {
 
     fn enqueue(&self) -> Result<Self::Buffer, Error> {
         let queue = OpenCL::queue(self.size, &[])?;
-        let seed: u32 = random();
+        let seed: u32 = Rand::new().gen();
 
         let output = Buffer::builder()
             .queue(queue.clone())
@@ -786,7 +786,7 @@ impl Enqueue<OpenCL, f32> for RandomUniform {
 
 impl ReadValue<OpenCL, f32> for RandomUniform {
     fn read_value(&self, _offset: usize) -> Result<f32, Error> {
-        Ok(random())
+        Ok(Rand::new().gen())
     }
 }
 

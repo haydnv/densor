@@ -11,22 +11,27 @@ repository = "https://github.com/haydnv/ha-ndarray.git"
 keywords = ["ndarray", "tensor", "gpu", "ml", "parallel"]
 categories = ["data-structures", "hardware-support", "mathematics"]
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [features]
 all = ["freqfs", "opencl", "stream"]
 freqfs = ["freqfs/stream", "stream"]
 opencl = ["memoize", "ocl"]
 stream = ["destream", "futures"]
+wasm = ["wasm-bindgen"]
 
 [dependencies]
 destream = { version = "0.9", optional = true }
 futures = { version = "0.3", optional = true }
+frand = "0.10"
 freqfs = { version = "0.11", optional = true }
 get-size = "0.1"
 lazy_static = "1.5"
 memoize = { version = "0.5", optional = true }
 num_cpus = "1.16"
 ocl = { version = "0.19", optional = true }
-rand = "0.9"
 rayon = "1.10"
 smallvec = "1.13"
 transpose = "0.2"
+wasm-bindgen = { version = "0.2", optional = true }
